@@ -123,7 +123,10 @@ def pp_intro(y, num_comp, Pybel_objects, TEMP, H2Oi,
 		N_perbin = np.array((sum(pconcn))).reshape(-1, 1) # (# particles/cc (air))
 		x = np.zeros(1) # radii at size bin centre
 		# mean radius of this one size bin (um)
-		meansize = mean_radn
+		if (mean_radn.ndim > 0): # if an array
+			meansize = sum(mean_radn)/len(mean_radn)
+		else: # if a scalar
+			meansize = mean_radn
 		x[0] = meansize
 		# extend uppersize to reduce chance of particles growing beyond this
 		upper_bin_rad_amp = 1.0e6

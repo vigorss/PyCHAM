@@ -287,8 +287,7 @@ def ode_updater(update_stp,
 		
 		# model component concentration changes to get new concentrations
 		# (molecules/cc)
-		print(seedi, seedi.shape)
-		[res, res_t] = ode_solv.ode_solv(y, tnew, rindx, pindx, rstoi, pstoi,
+		[y, res_t] = ode_solv.ode_solv(y, tnew, rindx, pindx, rstoi, pstoi,
 			nreac, nprod, rrc, jac_stoi, njac, jac_den_indx, jac_indx,
 			Cinfl_now, y_arr, y_rind, uni_y_rind, y_pind, uni_y_pind, 
 			reac_col, prod_col, rstoi_flat, 
@@ -302,8 +301,6 @@ def ode_updater(update_stp,
 			reac_col_aq, prod_col_aq, rstoi_flat_aq, 
 			pstoi_flat_aq, rr_arr_aq, rr_arr_p_aq, eqn_num)
 		
-		# take last installment from res
-		y = res[-1, :]
 		
 		step_no += 1 # track number of steps
 		sumt += tnew # total time through simulation (s)
@@ -315,7 +312,7 @@ def ode_updater(update_stp,
 				if (siz_str == 0): # moving centre
 					(N_perbin, Varr, y, x, redt, t, bc_red) = mov_cen.mov_cen_main(N_perbin, 
 					Vbou, num_sb, num_comp, y_mw, x, Vol0, tnew, 
-					update_stp, y0, MV, Psat[0, :], ic_red, res, res_t)
+					update_stp, y0, MV, Psat[0, :], ic_red, y, res_t)
 				if (siz_str == 1): # full-moving
 					(Varr, x, y[num_comp:(num_comp*(num_sb-wall_on+1))], 
 					N_perbin, Vbou, rbou) = fullmov.fullmov((num_sb-wall_on), N_perbin,

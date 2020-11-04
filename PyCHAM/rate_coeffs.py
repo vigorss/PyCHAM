@@ -1,6 +1,6 @@
 '''module for calculating reaction rate coefficients (automatically generated)'''
 # module to hold expressions for calculating rate coefficients # 
-# created at 2020-11-02 16:33:42.674512
+# created at 2020-11-04 18:11:00.149622
 
 import numpy
 import photolysisRates
@@ -165,60 +165,14 @@ def evaluate_rates(RO2, H2O, TEMP, lightm, time, lat, lon, act_flux_path, DayOfY
 
 	if lightm == 0:
 		J = [0]*len(J)
-	rate_values = numpy.zeros((49))
+	rate_values = numpy.zeros((3))
 	
 	# reac_coef has been formatted so that python can recognize it
 	# gas-phase reactions
-	rate_values[0] = 5.6e-34*N2*(TEMP/300)**-2.6*O2
-	rate_values[1] = 6.0e-34*O2*(TEMP/300)**-2.6*O2
-	rate_values[2] = 8.0e-12*numpy.exp(-2060/TEMP)
-	rate_values[3] = KMT01
-	rate_values[4] = 5.5e-12*numpy.exp(188/TEMP)
-	rate_values[5] = KMT02
-	rate_values[6] = 3.2e-11*numpy.exp(67/TEMP)*O2
-	rate_values[7] = 2.0e-11*numpy.exp(130/TEMP)*N2
-	rate_values[8] = 1.4e-12*numpy.exp(-1310/TEMP)
-	rate_values[9] = 1.4e-13*numpy.exp(-2470/TEMP)
-	rate_values[10] = 3.3e-39*numpy.exp(530/TEMP)*O2
-	rate_values[11] = 1.8e-11*numpy.exp(110/TEMP)
-	rate_values[12] = 4.50e-14*numpy.exp(-1260/TEMP)
-	rate_values[13] = KMT03
-	rate_values[14] = 2.14e-10*H2O
-	rate_values[15] = 1.70e-12*numpy.exp(-940/TEMP)
-	rate_values[16] = 7.7e-12*numpy.exp(-2100/TEMP)
-	rate_values[17] = KMT05
-	rate_values[18] = 2.9e-12*numpy.exp(-160/TEMP)
-	rate_values[19] = 2.03e-16*(TEMP/300)**4.57*numpy.exp(693/TEMP)
-	rate_values[20] = 4.8e-11*numpy.exp(250/TEMP)
-	rate_values[21] = 2.20e-13*KMT06*numpy.exp(600/TEMP)
-	rate_values[22] = 1.90e-33*M*KMT06*numpy.exp(980/TEMP)
-	rate_values[23] = KMT07
-	rate_values[24] = KMT08
-	rate_values[25] = 2.0e-11
-	rate_values[26] = 3.45e-12*numpy.exp(270/TEMP)
-	rate_values[27] = KMT09
-	rate_values[28] = 3.2e-13*numpy.exp(690/TEMP)*1.0
-	rate_values[29] = 4.0e-12
-	rate_values[30] = 2.5e-12*numpy.exp(260/TEMP)
-	rate_values[31] = KMT11
-	rate_values[32] = 4.0e-32*numpy.exp(-1000/TEMP)*M
-	rate_values[33] = KMT12
-	rate_values[34] = 1.3e-12*numpy.exp(-330/TEMP)*O2
-	rate_values[35] = 6.00e-06
-	rate_values[36] = 4.00e-04
-	rate_values[37] = 1.20e-15*H2O
-	rate_values[38] = J[1]
-	rate_values[39] = J[2]
-	rate_values[40] = J[3]
-	rate_values[41] = J[4]
-	rate_values[42] = J[5]
-	rate_values[43] = J[6]
-	rate_values[44] = J[7]
-	rate_values[45] = J[8]
-	rate_values[46] = KMT04
-	rate_values[47] = KMT10
-	rate_values[48] = 0
+	rate_values[0] = 8.05e-16*numpy.exp(-640/TEMP)*0.58
 	
 	# aqueous-phase reactions
+	rate_values[1] = 1.0e-14
+	rate_values[2] = 1.0e-14
 	
 	return(rate_values)

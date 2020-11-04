@@ -50,8 +50,8 @@ def mov_cen_main(n0, s0, sbn, nc, MW, x, Vol0, t, tmax, C0, MV,
 	
 	y = np.zeros((nc*(sbn+2))) # empty array for holding new concentrations
 	# gas and wall concentrations
-	y[0:nc] = res[-tsi, 0:nc]
-	y[-nc::] = res[-tsi, -nc::]
+	y[0:nc] = res[0:nc]
+	y[-nc::] = res[-nc::]
 	# empty array for holding new particle number concentrations
 	N_perbin = np.zeros((sbn, 1))
 	
@@ -63,7 +63,7 @@ def mov_cen_main(n0, s0, sbn, nc, MW, x, Vol0, t, tmax, C0, MV,
 		# add number concentration (# particles/cc (air))
 		N_perbin[sbi_new, 0] += n0[sbi]
 		# add components (molecules/cc (air))
-		y[((sbi_new+1)*nc):((sbi_new+2)*nc)] += res[-tsi, ((sbi+1)*nc):((sbi+2)*nc)]
+		y[((sbi_new+1)*nc):((sbi_new+2)*nc)] += res[((sbi+1)*nc):((sbi+2)*nc)]
 	
 	# reshape particle-phase concentrations into components in rows and size bins in
 	# columns
