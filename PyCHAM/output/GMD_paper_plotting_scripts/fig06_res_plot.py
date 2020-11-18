@@ -26,7 +26,7 @@ import numpy as np
 # subsaturated due to condensation, therefore the specified vapour pressure and injection
 # concentration of water must be accurate and precise   
 
-# model variables input file for Jacobson:
+# model variables input file for Jacobson, note the size_structure will change:
 
 #res_file_name = test_Jacobs_16sb_mc
 #total_model_time = 600.

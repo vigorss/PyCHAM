@@ -184,7 +184,7 @@ def eqn_interr(num_eqn, eqn_list, aqeqn_list, chem_scheme_markers, spec_name,
 				comp_namelist.append(name_only) # add to chemical scheme name list
 			
 				# convert MCM chemical names to SMILES
-				if name_only in spec_name:
+				if (name_only in spec_name):
 					# index where xml file name matches reaction component name
 					name_indx = spec_name.index(name_only)
 					name_SMILE = spec_smil[name_indx] # SMILES of component

@@ -86,8 +86,9 @@ def kimt_calc(y, mfp, num_sb, num_comp, accom_coeff, y_mw, surfT, R_gas, TEMP, N
 	rho_a =  (Press*ma)/((R_gas*1.e6)*TEMP)
 
 
-	# gas-phase diffusion coefficient (cm2/s), Eq. 16.17 of Jacobson (2005)
-	# note that for collision diameter we estimate in partit_var_prep
+	# gas-phase diffusion coefficient (cm2/s), eq. 16.17 of Jacobson (2005)
+	# note that collision diameter estimated in partit_var_prep and updated with 
+	# temperature in cham_up;
 	# scale R_gas by 1e7 to convert from m^2.kg/s^2.k.mol to cm^2.g/s^2.k.mol 
 	DStar_org = ((5./(16.*NA*(coll_dia**2.)*rho_a))*
 		(((((R_gas*1.e7)*TEMP*ma)/(2*np.pi))*((y_mw+ma)/y_mw))**0.5))
@@ -105,12 +106,13 @@ def kimt_calc(y, mfp, num_sb, num_comp, accom_coeff, y_mw, surfT, R_gas, TEMP, N
 
 	# zero partitioning to particles for any components with low condensability
 	if (partit_cutoff): # if a value provided (default is empty list)
-		partit_cutoff_Pa = []
-		# convert partit_cutoff from Pa to molecules/cc (air)
-		partit_cutoff_Pa[:] = partit_cutoff[:]*(NA/((R_gas*1.e6)*TEMP))
-		highVPi = (Psat*act_coeff > partit_cutoff_Pa)[0, :]
-		highVPi[H2Oi] = 0 # mask water to allow its partitioning
-		kimt[:, highVPi] = 0.
+
+		# convert partit_cutoff from Pa to molecules/cc (air), note README states
+		# that just one value accepted for partit_cutoff input
+		partit_cutoff_Pa = partit_cutoff[0]*(NA/((R_gas*1.e6)*TEMP))
+		highVPi = (Psat*act_coeff) > partit_cutoff_Pa
+		highVPi[:, H2Oi] = 0 # mask water to allow its partitioning
+		kimt[highVPi] = 0.
 
 	# zero partitioning coefficient for size bins where no particles - enables significant
 	# computation time acceleration and is physically realistic
