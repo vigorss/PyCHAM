@@ -313,7 +313,6 @@ def ode_updater(update_stp,
 			reac_col_aq, prod_col_aq, rstoi_flat_aq, 
 			pstoi_flat_aq, rr_arr_aq, rr_arr_p_aq, eqn_num, jac_mod_len, 
 			jac_part_hmf_indx, rw_indx, N_perbin, jac_part_H2O_indx, H2Oi)
-			print('water done')
 			
 			# zero partitioning of water to particles for integration without water gas-particle partitioning
 			kimt[:, H2Oi] = 0.
@@ -334,7 +333,7 @@ def ode_updater(update_stp,
 			reac_col_aq, prod_col_aq, rstoi_flat_aq, 
 			pstoi_flat_aq, rr_arr_aq, rr_arr_p_aq, eqn_num, jac_mod_len, 
 			jac_part_hmf_indx, rw_indx, N_perbin, jac_part_H2O_indx, H2Oi)
-		print('others done')
+
 		step_no += 1 # track number of steps
 		sumt += tnew # total time through simulation (s)
 		
